@@ -27,6 +27,11 @@ export async function POST(req: Request) {
       console.error("Error reading .env.local file directly:", e);
     }
 
+    // Sanitize API Key (trim spaces, newlines, and strip accidental quotes)
+    if (apiKey) {
+      apiKey = apiKey.trim().replace(/^["']|["']$/g, "");
+    }
+
     if (!apiKey || apiKey === "your_deepseek_api_key_here") {
       // Return mock data for testing if API key is not configured
       console.warn("DeepSeek API key is not configured. Returning mock data.");
