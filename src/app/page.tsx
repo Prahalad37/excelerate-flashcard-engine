@@ -107,6 +107,18 @@ export default function Home() {
     }
   }, []);
 
+  // Apply theme class to document element (html/root) to enable CSS variable cascading
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const root = window.document.documentElement;
+    root.classList.remove("theme-bright", "theme-ultra-bright");
+    if (theme === "bright") {
+      root.classList.add("theme-bright");
+    } else if (theme === "ultra-bright") {
+      root.classList.add("theme-ultra-bright");
+    }
+  }, [theme]);
+
   const saveDecks = (updatedDecks: Deck[]) => {
     setDecks(updatedDecks);
     localStorage.setItem("excelerate_decks", JSON.stringify(updatedDecks));
@@ -153,16 +165,8 @@ export default function Home() {
   const activeDeck = decks.find((d) => d.id === activeDeckId);
   const totalCards = decks.reduce((acc, d) => acc + d.cards.length, 0);
 
-  // Determine theme class to append to the wrapper
-  const themeClass = 
-    theme === "bright" 
-      ? "theme-bright" 
-      : theme === "ultra-bright" 
-      ? "theme-ultra-bright" 
-      : "";
-
   return (
-    <div className={`min-h-screen bg-app-bg text-app-fg flex flex-col font-sans selection:bg-accent/30 selection:text-accent-fg transition-colors duration-300 ${themeClass}`}>
+    <div className="min-h-screen bg-app-bg text-app-fg flex flex-col font-sans selection:bg-accent/30 selection:text-accent-fg transition-colors duration-300">
       {/* Header */}
       <header className="border-b border-border-divider bg-app-bg/75 backdrop-blur-md sticky top-0 z-50 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
