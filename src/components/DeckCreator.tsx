@@ -122,28 +122,28 @@ export const DeckCreator: React.FC<DeckCreatorProps> = ({ onAddDeck, onCancel })
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-zinc-900/50 border border-zinc-800 p-6 md:p-8 rounded-3xl backdrop-blur-xl">
+    <div className="max-w-2xl mx-auto bg-card-bg border border-card-border p-6 md:p-8 rounded-3xl backdrop-blur-xl transition-all duration-300">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-zinc-100">Create New Deck</h2>
+        <h2 className="text-2xl font-bold text-app-fg">Create New Deck</h2>
         <button
           onClick={onCancel}
-          className="text-zinc-400 hover:text-zinc-100 text-sm font-medium transition-colors"
+          className="text-text-muted hover:text-app-fg text-sm font-semibold transition-colors cursor-pointer"
         >
           Cancel
         </button>
       </div>
 
       {/* Tabs */}
-      <div className="flex bg-zinc-950 p-1 rounded-xl mb-8 border border-zinc-800/80">
+      <div className="flex bg-app-bg p-1 rounded-xl mb-8 border border-card-border/80">
         <button
           onClick={() => {
             setCreationMode("ai");
             setError(null);
           }}
-          className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+          className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all duration-200 cursor-pointer ${
             creationMode === "ai"
-              ? "bg-emerald-500 text-zinc-950 shadow-md shadow-emerald-500/10"
-              : "text-zinc-400 hover:text-zinc-200"
+              ? "bg-accent text-accent-contrast shadow-md shadow-accent/10"
+              : "text-text-muted hover:text-app-fg"
           }`}
         >
           ⚡ AI Generator (DeepSeek)
@@ -153,10 +153,10 @@ export const DeckCreator: React.FC<DeckCreatorProps> = ({ onAddDeck, onCancel })
             setCreationMode("manual");
             setError(null);
           }}
-          className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+          className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all duration-200 cursor-pointer ${
             creationMode === "manual"
-              ? "bg-emerald-500 text-zinc-950 shadow-md shadow-emerald-500/10"
-              : "text-zinc-400 hover:text-zinc-200"
+              ? "bg-accent text-accent-contrast shadow-md shadow-accent/10"
+              : "text-text-muted hover:text-app-fg"
           }`}
         >
           ✍️ Manual Creator
@@ -173,7 +173,7 @@ export const DeckCreator: React.FC<DeckCreatorProps> = ({ onAddDeck, onCancel })
       {creationMode === "ai" && (
         <form onSubmit={handleGenerateAI} className="space-y-6">
           <div>
-            <label className="block text-sm font-semibold text-zinc-300 mb-2">
+            <label className="block text-sm font-semibold text-text-muted mb-2">
               Topic or Subject
             </label>
             <input
@@ -181,13 +181,13 @@ export const DeckCreator: React.FC<DeckCreatorProps> = ({ onAddDeck, onCancel })
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
               placeholder="e.g. Spaced Repetition, Photosynthesis, French Verbs"
-              className="w-full bg-zinc-950 border border-zinc-850 rounded-xl px-4 py-3 text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-emerald-500/50 transition-colors"
+              className="w-full bg-app-bg border border-card-border rounded-xl px-4 py-3 text-app-fg placeholder-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors"
               disabled={loading}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-zinc-300 mb-2">
+            <label className="block text-sm font-semibold text-text-muted mb-2">
               Study Material / Notes
             </label>
             <textarea
@@ -195,17 +195,17 @@ export const DeckCreator: React.FC<DeckCreatorProps> = ({ onAddDeck, onCancel })
               onChange={(e) => setSourceText(e.target.value)}
               placeholder="Paste your study notes, articles, or text book chapters here..."
               rows={6}
-              className="w-full bg-zinc-950 border border-zinc-850 rounded-xl px-4 py-3 text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-emerald-500/50 transition-colors resize-none"
+              className="w-full bg-app-bg border border-card-border rounded-xl px-4 py-3 text-app-fg placeholder-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors resize-none"
               disabled={loading}
             />
           </div>
 
           <div>
             <div className="flex justify-between items-center mb-2">
-              <label className="text-sm font-semibold text-zinc-300">
+              <label className="text-sm font-semibold text-text-muted">
                 Number of Cards
               </label>
-              <span className="text-sm font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-lg">
+              <span className="text-sm font-bold text-accent-fg bg-accent-bg border border-accent/20 px-2 py-0.5 rounded-lg">
                 {quantity}
               </span>
             </div>
@@ -215,7 +215,7 @@ export const DeckCreator: React.FC<DeckCreatorProps> = ({ onAddDeck, onCancel })
               max="15"
               value={quantity}
               onChange={(e) => setQuantity(Number(e.target.value))}
-              className="w-full accent-emerald-500 bg-zinc-800 h-1.5 rounded-lg appearance-none cursor-pointer"
+              className="w-full accent-accent bg-card-border h-1.5 rounded-lg appearance-none cursor-pointer"
               disabled={loading}
             />
           </div>
@@ -223,11 +223,11 @@ export const DeckCreator: React.FC<DeckCreatorProps> = ({ onAddDeck, onCancel })
           <button
             type="submit"
             disabled={loading}
-            className="w-full inline-flex items-center justify-center px-4 py-3 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-400 text-zinc-950 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-emerald-500/10 cursor-pointer"
+            className="w-full inline-flex items-center justify-center px-4 py-3 rounded-xl font-bold bg-accent hover:bg-accent-hover text-accent-contrast transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-accent/10 cursor-pointer"
           >
             {loading ? (
               <span className="flex items-center gap-2">
-                <svg className="animate-spin h-5 w-5 text-zinc-950" fill="none" viewBox="0 0 24 24">
+                <svg className="animate-spin h-5 w-5 text-accent-contrast" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                 </svg>
@@ -244,7 +244,7 @@ export const DeckCreator: React.FC<DeckCreatorProps> = ({ onAddDeck, onCancel })
       {creationMode === "manual" && (
         <form onSubmit={handleSaveManual} className="space-y-6">
           <div>
-            <label className="block text-sm font-semibold text-zinc-300 mb-2">
+            <label className="block text-sm font-semibold text-text-muted mb-2">
               Deck Name
             </label>
             <input
@@ -252,12 +252,12 @@ export const DeckCreator: React.FC<DeckCreatorProps> = ({ onAddDeck, onCancel })
               value={deckName}
               onChange={(e) => setDeckName(e.target.value)}
               placeholder="e.g. Javascript Fundamentals"
-              className="w-full bg-zinc-950 border border-zinc-850 rounded-xl px-4 py-3 text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-emerald-500/50 transition-colors"
+              className="w-full bg-app-bg border border-card-border rounded-xl px-4 py-3 text-app-fg placeholder-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-zinc-300 mb-2">
+            <label className="block text-sm font-semibold text-text-muted mb-2">
               Deck Description
             </label>
             <input
@@ -265,27 +265,27 @@ export const DeckCreator: React.FC<DeckCreatorProps> = ({ onAddDeck, onCancel })
               value={deckDesc}
               onChange={(e) => setDeckDesc(e.target.value)}
               placeholder="e.g. Core concepts of ES6, async/await, and scope."
-              className="w-full bg-zinc-950 border border-zinc-850 rounded-xl px-4 py-3 text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-emerald-500/50 transition-colors"
+              className="w-full bg-app-bg border border-card-border rounded-xl px-4 py-3 text-app-fg placeholder-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors"
             />
           </div>
 
           <div className="space-y-4">
-            <label className="block text-sm font-semibold text-zinc-300">
+            <label className="block text-sm font-semibold text-text-muted">
               Cards
             </label>
 
             {manualCards.map((card, idx) => (
               <div 
                 key={idx} 
-                className="relative bg-zinc-950/40 p-4 border border-zinc-800/80 rounded-2xl flex flex-col gap-3 group/row"
+                className="relative bg-card-bg/40 p-4 border border-card-border rounded-2xl flex flex-col gap-3 group/row"
               >
                 <div className="flex justify-between items-center">
-                  <span className="text-xs font-bold text-zinc-500">Card #{idx + 1}</span>
+                  <span className="text-xs font-bold text-text-muted">Card #{idx + 1}</span>
                   {manualCards.length > 1 && (
                     <button
                       type="button"
                       onClick={() => handleRemoveManualCardRow(idx)}
-                      className="text-zinc-500 hover:text-red-400 transition-colors p-1 rounded-lg hover:bg-zinc-800/30"
+                      className="text-text-muted hover:text-red-400 transition-colors p-1 rounded-lg hover:bg-card-border cursor-pointer text-xs font-semibold"
                     >
                       Delete
                     </button>
@@ -298,14 +298,14 @@ export const DeckCreator: React.FC<DeckCreatorProps> = ({ onAddDeck, onCancel })
                     value={card.front}
                     onChange={(e) => handleManualCardChange(idx, "front", e.target.value)}
                     placeholder="Question (Front)"
-                    className="w-full bg-zinc-950 border border-zinc-850 rounded-xl px-4 py-2.5 text-sm text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-emerald-500/50 transition-colors"
+                    className="w-full bg-app-bg border border-card-border rounded-xl px-4 py-2.5 text-sm text-app-fg placeholder-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors"
                   />
                   <input
                     type="text"
                     value={card.back}
                     onChange={(e) => handleManualCardChange(idx, "back", e.target.value)}
                     placeholder="Answer (Back)"
-                    className="w-full bg-zinc-950 border border-zinc-850 rounded-xl px-4 py-2.5 text-sm text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-emerald-500/50 transition-colors"
+                    className="w-full bg-app-bg border border-card-border rounded-xl px-4 py-2.5 text-sm text-app-fg placeholder-text-muted/50 focus:outline-none focus:border-accent/50 transition-colors"
                   />
                 </div>
               </div>
@@ -314,7 +314,7 @@ export const DeckCreator: React.FC<DeckCreatorProps> = ({ onAddDeck, onCancel })
             <button
               type="button"
               onClick={handleAddManualCardRow}
-              className="w-full border border-dashed border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-zinc-200 py-3 rounded-2xl text-sm font-semibold transition-all duration-200"
+              className="w-full border border-dashed border-card-border hover:border-accent/40 text-text-muted hover:text-app-fg py-3 rounded-2xl text-sm font-semibold transition-all duration-200 cursor-pointer"
             >
               + Add Another Card
             </button>
@@ -322,7 +322,7 @@ export const DeckCreator: React.FC<DeckCreatorProps> = ({ onAddDeck, onCancel })
 
           <button
             type="submit"
-            className="w-full inline-flex items-center justify-center px-4 py-3 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-400 text-zinc-950 transition-all duration-200 shadow-lg shadow-emerald-500/10"
+            className="w-full inline-flex items-center justify-center px-4 py-3 rounded-xl font-bold bg-accent hover:bg-accent-hover text-accent-contrast transition-all duration-200 shadow-lg shadow-accent/10 cursor-pointer"
           >
             Save Deck
           </button>
